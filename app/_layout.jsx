@@ -1,7 +1,10 @@
 import { SplashScreen, Stack } from 'expo-router'
-import { useFonts } from "expo-font";
 import {useEffect} from 'react'
+import { useFonts } from "expo-font";
 import { StyleSheet, Text, View } from 'react-native'
+import { Provider } from 'react-redux';
+import ErrorBoundary from '../components/ErrorBoundary';
+import store from '../context/store';
 
 
 
@@ -34,9 +37,14 @@ const RootPage = () => {
     return null;
   }
   return (
-   <Stack>
-    <Stack.Screen name='index'/>
-   </Stack>
+    <ErrorBoundary>
+       <Provider store={store}>
+        <Stack>
+          <Stack.Screen name='index' />
+        </Stack>
+      </Provider>
+    </ErrorBoundary>
+  
   )
 }
 
