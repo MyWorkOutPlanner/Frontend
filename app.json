@@ -2,27 +2,52 @@
   "expo": {
     "name": "MY_FIT_PLANNER",
     "slug": "MY_FIT_PLANNER",
-    "scheme":"MyFitPlanner",
+    "scheme": "MyFitPlanner",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons/home.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icons/eye.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.MyWorkOutPlanner",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.27521586011-q55a0bkqea55inpic8v8cbv0k5bcdhe7"
+            ]
+          }
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/home.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.MyWorkOutPlanner"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/icons/eye.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0a9d621c-f148-4d22-a803-b3b82590c80f"
+      }
+    },
+    "plugins": [
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.27521586011-q55a0bkqea55inpic8v8cbv0k5bcdhe7"
+        }
+      ]
+    ]
+  
   }
 }

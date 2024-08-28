@@ -8,6 +8,7 @@ import store from '../context/store';
 
 
 
+
 const RootPage = () => {
   const [fontsLoaded, error] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -22,7 +23,9 @@ const RootPage = () => {
   });
 
   useEffect(() => {
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
 
     if (fontsLoaded) {
       SplashScreen.hideAsync();
@@ -40,7 +43,9 @@ const RootPage = () => {
     <ErrorBoundary>
        <Provider store={store}>
         <Stack>
-          <Stack.Screen name='index' />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         </Stack>
       </Provider>
     </ErrorBoundary>
