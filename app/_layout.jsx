@@ -5,21 +5,22 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Provider } from 'react-redux';
 import ErrorBoundary from '../components/ErrorBoundary';
 import store from '../context/store';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 
 
 const RootPage = () => {
   const [fontsLoaded, error] = useFonts({
-    "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
-    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
-    "Poppins-ExtraBold": require("../assets/fonts/Poppins-ExtraBold.ttf"),
-    "Poppins-ExtraLight": require("../assets/fonts/Poppins-ExtraLight.ttf"),
-    "Poppins-Light": require("../assets/fonts/Poppins-Light.ttf"),
-    "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
-    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
-    "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
-    "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
+    "Overpass-Black": require("../assets/fonts/Overpass-Black.ttf"),
+    "Overpass-Bold": require("../assets/fonts/Overpass-Bold.ttf"),
+    "Overpass-ExtraBold": require("../assets/fonts/Overpass-ExtraBold.ttf"),
+    "Overpass-ExtraLight": require("../assets/fonts/Overpass-ExtraLight.ttf"),
+    "Overpass-Light": require("../assets/fonts/Overpass-Light.ttf"),
+    "Overpass-Medium": require("../assets/fonts/Overpass-Medium.ttf"),
+    "Overpass-Regular": require("../assets/fonts/Overpass-Regular.ttf"),
+    "Overpass-SemiBold": require("../assets/fonts/Overpass-SemiBold.ttf"),
+    "Overpass-Thin": require("../assets/fonts/Overpass-Thin.ttf"),
   });
 
   useEffect(() => {
@@ -40,26 +41,23 @@ const RootPage = () => {
     return null;
   }
   return (
+    <SafeAreaProvider>
     <ErrorBoundary>
        <Provider store={store}>
-        <Stack>
+        <Stack  screenOptions={{
+        headerTitle:'',
+        headerStyle: {
+          backgroundColor: '#ffff',
+        },}}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: true }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
         </Stack>
       </Provider>
     </ErrorBoundary>
+    </SafeAreaProvider>
   
   )
 }
 
 export default RootPage
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-})

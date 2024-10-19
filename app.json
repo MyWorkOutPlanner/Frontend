@@ -33,7 +33,7 @@
       "package": "com.MyWorkOutPlanner"
     },
     "web": {
-      "favicon": "./assets/icons/eye.png"
+      "favicon": "./assets/icons/FitLog.png"
     },
     "extra": {
       "eas": {

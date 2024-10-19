@@ -16,7 +16,14 @@ export default  () => {
       
         />
         <Stack.Screen
-          name="sign-up"
+          name="sign-up-first"
+          options={{
+            headerShown: false,
+          }}
+          
+        />
+        <Stack.Screen
+          name="sign-up-two"
           options={{
             headerShown: false,
           }}

@@ -1,78 +1,87 @@
-import { View, Text, Button, StyleSheet } from 'react-native'
-import React, { useEffect ,useState  } from 'react'
-import { StatusBar } from "expo-status-bar";
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from "@react-native-google-signin/google-signin";
-import { useRouter } from 'expo-router';
+import { View, Text } from 'react-native'
+import React, { useState  } from 'react'
+import { CustomButton, DividerWithText, FormField, GoogleButton, ScreenWrapper } from '../../components';
+
 
 
 
 const SingIn = () => {
-  const [token, setToken] = useState("");
-  const [userInfo, setUserInfo] = useState(null);
-  const router = useRouter();
-  console.log(userInfo,"User")
-  const [error, setError] = useState();
-  const configureGoogleSignIn = () => {
-    GoogleSignin.configure({
-      webClientId: "27521586011-v4o57nv193kpia88qr76edo85mphkmng.apps.googleusercontent.com",
-      iosClientId: "27521586011-q55a0bkqea55inpic8v8cbv0k5bcdhe7.apps.googleusercontent.com",
-      androidClientId: "27521586011-jne7l1v7btnn4s2gc3ts18p4c3psg7c1.apps.googleusercontent.com"
-  
-    });
-  }
-  useEffect(() => {
-    configureGoogleSignIn();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
   });
+  const [ error, setError] = useState({
+    email : '',
+    type : '',
+  })
+  const [isSubmitting, setSubmitting] = useState(false);
 
-  const signIn = async () => {
-    console.log("Pressed sign in");
-
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      console.log(JSON.stringify(userInfo),"userInfo")
-      setUserInfo(userInfo.user);
-      setError();
-    } catch (e) {
-      console.log(e,"error")
-      setError(e);
-    }
-  };
-  const logout = () => {
-    setUserInfo(undefined);
-    GoogleSignin.revokeAccess();
-    GoogleSignin.signOut();
-  };
-
-
+const submit = () => {
+ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ const passwordRegex = /^(?=(.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{2,}))[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}$/;
+ if (!emailRegex.test(form.email))  {
+  setError({
+    error : 'Please enter a valid email address',
+    type : 'Email'
+  }); 
+  return
+}
+if(!passwordRegex.test(form.password)){
+  setError({
+    error : 'Please enter a valid Password ',
+    type : 'Password'
+  }); 
+  return
+}
+  setError(''); 
+}
   return (
-    <View style={styles.container}>
-      {userInfo ? (
-        <Button title="Logout" onPress={logout} />
-      ) : (
-        <GoogleSigninButton
-          size={GoogleSigninButton.Size.Standard}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={signIn}
-        />
-        
-      )}
-  <Button title='home' onPress={()=>router.push("/home")}/>
-      <StatusBar style="auto" />
-    </View>
+   
+    <ScreenWrapper >
+      <View className=' bg-white h-full w-full flex flex-col mt-0 p-2 justify-center items-center  '>
+        <Text className='w-full text-center text-[30px] font-bold font-pbold leading-8'> Sign In </Text>
+        <View className='w-full'>
+          <View className='w-full px-2'>
+          <FormField
+            title="Email"
+            value={form.email}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
+            otherStyles="mt-7"
+            keyboardType="email-address"
+            placeholder={"Email Address"}
+            error = { error}
+          />
+            <FormField
+            title="Password"
+            value={form.password}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
+            otherStyles="mt-7"
+            placeholder={"Enter password"}
+            error = {error}
+          />
+           <CustomButton
+            title="Sign In"
+            handlePress={submit}
+            containerStyles="mt-7"
+            isLoading={isSubmitting}
+          />
+
+          </View>
+        </View>
+        <View className='flex flex-col justify-center w-full my-4 items-center' >
+          <Text className='text-[14px] text-center text-primary-100'> Don't have an account? <Text className='text-black-200 text-[16px] font-medium'> Create Account</Text></Text>
+          <DividerWithText text='Or'></DividerWithText>
+          <GoogleButton/>
+
+        </View>
+      </View>
+
+   
+    </ScreenWrapper>
+    
 
   )
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+
 
 export default SingIn
