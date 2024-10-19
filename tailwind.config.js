@@ -4,7 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#161622",
+        primary: {
+          DEFAULT: "#7C4DFF",
+          100 : "#81809E"
+        },
         secondary: {
           DEFAULT: "#FF9C01",
           100: "#FF9001",
@@ -12,23 +15,27 @@ module.exports = {
         },
         black: {
           DEFAULT: "#000",
-          100: "#1E1E2D",
+          100: "#1E1E22",
           200: "#232533",
         },
         gray: {
           100: "#CDCDE0",
+          200: "#F3F6FB",
+          300: "#F4F4F6"
         },
+
       },
       fontFamily: {
-        pthin: ["Poppins-Thin", "sans-serif"],
-        pextralight: ["Poppins-ExtraLight", "sans-serif"],
-        plight: ["Poppins-Light", "sans-serif"],
-        pregular: ["Poppins-Regular", "sans-serif"],
-        pmedium: ["Poppins-Medium", "sans-serif"],
-        psemibold: ["Poppins-SemiBold", "sans-serif"],
-        pbold: ["Poppins-Bold", "sans-serif"],
-        pextrabold: ["Poppins-ExtraBold", "sans-serif"],
-        pblack: ["Poppins-Black", "sans-serif"],
+        pthin: ["Overpass-Thin", "sans-serif"],
+        pextralight: ["Overpass-ExtraLight", "sans-serif"],
+        plight: ["Overpass-Light", "sans-serif"],
+        pregular: ["Overpass-Regular", "sans-serif"],
+        pmedium: ["Overpass-Medium", "sans-serif"],
+        psemibold: ["Overpass-SemiBold", "sans-serif"],
+        pbold: ["Overpass-Bold", "sans-serif"],
+        pextrabold: ["Overpass-ExtraBold", "sans-serif"],
+        pblack: ["Overpass-Black", "sans-serif"],
+       
       },
     },
   },

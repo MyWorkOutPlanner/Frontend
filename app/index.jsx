@@ -1,28 +1,37 @@
 import * as React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import { Video, ResizeMode } from "expo-av";
 import { useRouter } from "expo-router";
-
+import { icons } from "../constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
   const router = useRouter();
   return (
+    <SafeAreaView className="bg-white h-full">
     <View style={styles.container}>
     <Video
       ref={video}
       style={styles.video}
       source={{
-        uri: "https://videos.pexels.com/video-files/5377700/5377700-sd_540_960_25fps.mp4",
+        uri: "https://videos.pexels.com/video-files/5319426/5319426-uhd_1440_2560_25fps.mp4",
       }}
       resizeMode={ResizeMode.COVER}
       shouldPlay
       isLooping
       onPlaybackStatusUpdate={(status) => setStatus(() => status)}
     />
-    <View style={styles.overlay}>
+    {/* <View style={styles.overlay}>
       <Text style={styles.mainText}>Workout Planner</Text>
+    
+     
+     
+    </View> */}
+    <View style={styles.overlay} >
+
+      <Image source={icons.brandLogo} style= {styles.logoImage}  />
      
      
     </View>
@@ -35,12 +44,13 @@ export default function App() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push("/sign-up")}
+        onPress={() => router.push("/sign-up-first")}
       >
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   </View>
+  </SafeAreaView>
   )
 }
 
@@ -55,8 +65,7 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
   },
   mainText: {
     color: "white",
@@ -98,4 +107,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  logoImage : {
+    width: 'full',
+    height: 80,
+    overflow: 'hidden',
+
+  }
 });
